@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+EXPOSE 8888
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
@@ -21,3 +22,7 @@ WORKDIR /workspace
 
 RUN pip install poetry
 RUN poetry install
+
+RUN mkdir notebook
+
+CMD ["poetry", "run", "jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
